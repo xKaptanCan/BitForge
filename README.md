@@ -10,7 +10,7 @@ A powerful, modern web application for number system conversions, bitwise operat
 [![Made with JavaScript](https://img.shields.io/badge/Made%20with-JavaScript-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![11 Languages](https://img.shields.io/badge/Languages-11-green.svg)](#-internationalization)
 
-[Live Demo](#) · [Features](#-features-at-a-glance) · [Screenshots](#-screenshots) · [Getting Started](#-getting-started)
+[Live Demo](https://xkaptancan.github.io/BitForge/) · [Features](#-features-at-a-glance) · [Screenshots](#-screenshots) · [Getting Started](#-getting-started)
 
 </div>
 
