@@ -17,6 +17,7 @@ const BitGrid = {
 
         this.setupEventListeners();
         this.render();
+        this.updateInfo();
         return true;
     },
 

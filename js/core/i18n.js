@@ -227,13 +227,12 @@ const I18n = {
         if (typeof LANG_DE !== 'undefined') this.data.de = LANG_DE;
         if (typeof LANG_FR !== 'undefined') this.data.fr = LANG_FR;
 
-        // Load saved language or detect from browser
+        // Load saved language or default to English
         const savedLang = Storage.get('language');
         if (savedLang && this.data[savedLang]) {
             this.currentLang = savedLang;
         } else {
-            const browserLang = navigator.language.split('-')[0];
-            this.currentLang = this.data[browserLang] ? browserLang : 'en';
+            this.currentLang = 'en';
         }
 
         this.updateUI();
