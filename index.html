@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="BitForge - Professional Binary, Hexadecimal, Decimal Converter & Bit Manipulation Visualizer">
+    <meta name="keywords"
+        content="binary converter, hex converter, bit manipulation, bitwise operations, IEEE 754, two's complement">
+    <meta name="author" content="BitForge">
+    <title>BitForge - Binary/Hex/Decimal Converter</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/components2.css">
+    <link rel="stylesheet" href="css/components3.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🔧</span>
+                <span class="logo-text">BitForge</span>
+            </div>
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="#converter" class="nav-link active" data-section="converter"
+                            data-i18n="nav.converter">Converter</a></li>
+                    <li><a href="#operations" class="nav-link" data-section="operations"
+                            data-i18n="nav.operations">Operations</a></li>
+                    <li><a href="#ieee754" class="nav-link" data-section="ieee754" data-i18n="nav.ieee754">IEEE 754</a>
+                    </li>
+                    <li><a href="#twos" class="nav-link" data-section="twos" data-i18n="nav.twos">Two's Comp</a></li>
+                    <li><a href="#expression" class="nav-link" data-section="expression"
+                            data-i18n="nav.expression">Expression</a></li>
+                    <li class="nav-dropdown">
+                        <button class="nav-link dropdown-toggle" aria-expanded="false" data-i18n="nav.more">
+                            More <span class="dropdown-arrow">▾</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#color" class="dropdown-item" data-section="color" data-i18n="nav.color">Color
+                                    Code</a></li>
+                            <li><a href="#ascii" class="dropdown-item" data-section="ascii" data-i18n="nav.ascii">ASCII
+                                    Table</a></li>
+                            <li><a href="#comparison" class="dropdown-item" data-section="comparison"
+                                    data-i18n="nav.comparison">Comparison</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                    <span class="theme-icon-dark">🌙</span>
+                    <span class="theme-icon-light">☀️</span>
+                </button>
+                <button class="icon-btn" id="music-toggle" aria-label="Toggle music" title="Binary Music">
+                    🎵
+                </button>
+                <button class="icon-btn" id="history-toggle" aria-label="Toggle history" title="History">
+                    📜
+                </button>
+                <button class="icon-btn" id="keyboard-shortcuts" aria-label="Keyboard shortcuts"
+                    title="Keyboard shortcuts (Ctrl+K)">
+                    ⌨️
+                </button>
+                <div class="lang-selector">
+                    <button class="lang-btn" id="lang-toggle" aria-label="Change language">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span class="lang-code">TR</span>
+                    </button>
+                    <ul class="lang-dropdown" id="lang-dropdown">
+                        <li><button class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span>
+                                English</button></li>
+                        <li><button class="lang-option" data-lang="tr"><span class="lang-flag">🇹🇷</span>
+                                Türkçe</button></li>
+                        <li><button class="lang-option" data-lang="es"><span class="lang-flag">🇪🇸</span>
+                                Español</button></li>
+                        <li><button class="lang-option" data-lang="zh"><span class="lang-flag">🇨🇳</span> 中文</button>
+                        </li>
+                        <li><button class="lang-option" data-lang="hi"><span class="lang-flag">🇮🇳</span>
+                                हिन्दी</button></li>
+                        <li><button class="lang-option" data-lang="ar"><span class="lang-flag">🇸🇦</span>
+                                العربية</button></li>
+                        <li><button class="lang-option" data-lang="pt"><span class="lang-flag">🇧🇷</span>
+                                Português</button></li>
+                        <li><button class="lang-option" data-lang="ru"><span class="lang-flag">🇷🇺</span>
+                                Русский</button></li>
+                        <li><button class="lang-option" data-lang="ja"><span class="lang-flag">🇯🇵</span> 日本語</button>
+                        </li>
+                        <li><button class="lang-option" data-lang="de"><span class="lang-flag">🇩🇪</span>
+                                Deutsch</button></li>
+                        <li><button class="lang-option" data-lang="fr"><span class="lang-flag">🇫🇷</span>
+                                Français</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Converter Section -->
+        <section id="converter" class="section section-active">
+            <div class="section-header">
+                <h1 class="section-title" data-i18n="converter.title">Number Converter</h1>
+                <p class="section-subtitle" data-i18n="converter.subtitle">Convert between Binary, Decimal, Hexadecimal,
+                    and Octal</p>
+            </div>
+
+            <div class="converter-container">
+                <!-- Input Cards -->
+                <div class="converter-grid">
+                    <!-- Decimal -->
+                    <div class="converter-card" data-base="dec">
+                        <div class="converter-card-header">
+                            <span class="base-badge dec">DEC</span>
+                            <span class="base-name" data-i18n="converter.decimal">Decimal</span>
+                            <button class="copy-btn" aria-label="Copy value" title="Copy">📋</button>
+                        </div>
+                        <input type="text" class="converter-input" id="dec-input" placeholder="0" data-base="10"
+                            autocomplete="off">
+                    </div>
+
+                    <!-- Binary -->
+                    <div class="converter-card" data-base="bin">
+                        <div class="converter-card-header">
+                            <span class="base-badge bin">BIN</span>
+                            <span class="base-name" data-i18n="converter.binary">Binary</span>
+                            <button class="copy-btn" aria-label="Copy value" title="Copy">📋</button>
+                        </div>
+                        <input type="text" class="converter-input" id="bin-input" placeholder="0" data-base="2"
+                            autocomplete="off">
+                    </div>
+
+                    <!-- Hexadecimal -->
+                    <div class="converter-card" data-base="hex">
+                        <div class="converter-card-header">
+                            <span class="base-badge hex">HEX</span>
+                            <span class="base-name" data-i18n="converter.hexadecimal">Hexadecimal</span>
+                            <button class="copy-btn" aria-label="Copy value" title="Copy">📋</button>
+                        </div>
+                        <input type="text" class="converter-input" id="hex-input" placeholder="0" data-base="16"
+                            autocomplete="off">
+                    </div>
+
+                    <!-- Octal -->
+                    <div class="converter-card" data-base="oct">
+                        <div class="converter-card-header">
+                            <span class="base-badge oct">OCT</span>
+                            <span class="base-name" data-i18n="converter.octal">Octal</span>
+                            <button class="copy-btn" aria-label="Copy value" title="Copy">📋</button>
+                        </div>
+                        <input type="text" class="converter-input" id="oct-input" placeholder="0" data-base="8"
+                            autocomplete="off">
+                    </div>
+                </div>
+
+                <!-- Bit Grid -->
+                <div class="bitgrid-container">
+                    <div class="bitgrid-header">
+                        <h2 class="bitgrid-title" data-i18n="bitgrid.title">Interactive Bit Grid</h2>
+                        <div class="bitgrid-controls">
+                            <div class="bit-width-selector">
+                                <button class="bit-width-btn" data-bits="8">8-bit</button>
+                                <button class="bit-width-btn active" data-bits="16">16-bit</button>
+                                <button class="bit-width-btn" data-bits="32">32-bit</button>
+                                <button class="bit-width-btn" data-bits="64">64-bit</button>
+                            </div>
+                            <button class="clear-bits-btn" id="clear-bits" data-i18n="bitgrid.clear">Clear All</button>
+                        </div>
+                    </div>
+                    <div class="bitgrid" id="bitgrid">
+                        <!-- Bits will be generated by JavaScript -->
+                    </div>
+                    <div class="bitgrid-footer">
+                        <span class="bit-count" data-i18n="bitgrid.setBits">Set bits: <strong
+                                id="set-bits-count">0</strong></span>
+                        <span class="max-value" data-i18n="bitgrid.maxValue">Max value: <strong
+                                id="max-value">65535</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Operations Section -->
+        <section id="operations" class="section">
+            <div class="section-header">
+                <h1 class="section-title" data-i18n="operations.title">Bit Operations</h1>
+                <p class="section-subtitle" data-i18n="operations.subtitle">Visualize bitwise operations step by step
+                </p>
+            </div>
+
+            <div class="operations-container">
+                <div class="operations-inputs">
+                    <div class="operation-input-group">
+                        <label class="operation-label">A</label>
+                        <input type="text" class="operation-input" id="op-input-a" placeholder="0" value="">
+                        <div class="operation-bits" id="op-bits-a">10101010</div>
+                    </div>
+
+                    <div class="operation-selector">
+                        <button class="op-btn active" data-op="and">AND</button>
+                        <button class="op-btn" data-op="or">OR</button>
+                        <button class="op-btn" data-op="xor">XOR</button>
+                        <button class="op-btn" data-op="not">NOT</button>
+                        <button class="op-btn" data-op="nand">NAND</button>
+                        <button class="op-btn" data-op="nor">NOR</button>
+                        <button class="op-btn" data-op="shl">SHL</button>
+                        <button class="op-btn" data-op="shr">SHR</button>
+                        <button class="op-btn" data-op="rol">ROL</button>
+                        <button class="op-btn" data-op="ror">ROR</button>
+                    </div>
+
+                    <div class="operation-input-group" id="op-input-b-group">
+                        <label class="operation-label">B</label>
+                        <input type="text" class="operation-input" id="op-input-b" placeholder="0" value="">
+                        <div class="operation-bits" id="op-bits-b">01010101</div>
+                    </div>
+                </div>
+
+                <div class="operation-visualizer">
+                    <div class="operation-row" id="vis-row-a">
+                        <!-- Generated by JS -->
+                    </div>
+                    <div class="operation-symbol" id="op-symbol">&amp;</div>
+                    <div class="operation-row" id="vis-row-b">
+                        <!-- Generated by JS -->
+                    </div>
+                    <div class="operation-divider"></div>
+                    <div class="operation-row result" id="vis-row-result">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+
+                <div class="operation-result">
+                    <div class="result-card">
+                        <span class="result-label" data-i18n="operations.result">Result</span>
+                        <span class="result-value" id="op-result-dec">0</span>
+                        <span class="result-hex" id="op-result-hex">0x00</span>
+                    </div>
+                    <button class="animate-btn" id="animate-operation" data-i18n="operations.animate">
+                        ▶ Animate
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- IEEE 754 Section -->
+        <section id="ieee754" class="section">
+            <div class="section-header">
+                <h1 class="section-title" data-i18n="ieee754.title">IEEE 754 Floating Point</h1>
+                <p class="section-subtitle" data-i18n="ieee754.subtitle">Analyze the binary representation of
+                    floating-point numbers</p>
+            </div>
+
+            <div class="ieee-container">
+                <div class="ieee-input-group">
+                    <input type="text" class="ieee-input" id="ieee-input" placeholder="3.14159" value="3.14159">
+                    <div class="ieee-precision-toggle">
+                        <button class="precision-btn active" data-precision="32" data-i18n="ieee754.float">Float
+                            (32-bit)</button>
+                        <button class="precision-btn" data-precision="64" data-i18n="ieee754.double">Double
+                            (64-bit)</button>
+                    </div>
+                </div>
+
+                <div class="ieee-visualization">
+                    <div class="ieee-bits-container">
+                        <div class="ieee-segment sign">
+                            <div class="segment-label" data-i18n="ieee754.sign">Sign</div>
+                            <div class="segment-bits" id="ieee-sign">0</div>
+                        </div>
+                        <div class="ieee-segment exponent">
+                            <div class="segment-label" data-i18n="ieee754.exponent">Exponent</div>
+                            <div class="segment-bits" id="ieee-exponent">10000000</div>
+                        </div>
+                        <div class="ieee-segment mantissa">
+                            <div class="segment-label" data-i18n="ieee754.mantissa">Mantissa</div>
+                            <div class="segment-bits" id="ieee-mantissa">10010010000111111011011</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ieee-breakdown">
+                    <div class="breakdown-item">
+                        <span class="breakdown-label" data-i18n="ieee754.signValue">Sign:</span>
+                        <span class="breakdown-value" id="ieee-sign-value">0 (Positive)</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label" data-i18n="ieee754.exponentValue">Exponent:</span>
+                        <span class="breakdown-value" id="ieee-exp-value">128 - 127 = 1</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label" data-i18n="ieee754.mantissaValue">Mantissa:</span>
+                        <span class="breakdown-value" id="ieee-mant-value">1.57079...</span>
+                    </div>
+                    <div class="breakdown-item highlight">
+                        <span class="breakdown-label" data-i18n="ieee754.formula">Formula:</span>
+                        <span class="breakdown-value" id="ieee-formula">(-1)⁰ × 2¹ × 1.57079... = 3.14159</span>
+                    </div>
+                </div>
+
+                <div class="ieee-special-values">
+                    <h3 data-i18n="ieee754.specialValues">Special Values</h3>
+                    <div class="special-values-grid">
+                        <button class="special-value-btn" data-value="0">+0</button>
+                        <button class="special-value-btn" data-value="-0">-0</button>
+                        <button class="special-value-btn" data-value="Infinity">+∞</button>
+                        <button class="special-value-btn" data-value="-Infinity">-∞</button>
+                        <button class="special-value-btn" data-value="NaN">NaN</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Two's Complement Section -->
+        <section id="twos" class="section">
+            <div class="section-header">
+                <h1 class="section-title" data-i18n="twos.title">Two's Complement</h1>
+                <p class="section-subtitle" data-i18n="twos.subtitle">Understand signed integer representation</p>
+            </div>
+
+            <div class="twos-container">
+                <div class="twos-input-group">
+                    <input type="text" class="twos-input" id="twos-input" placeholder="-42" value="-42">
+                    <div class="twos-bit-selector">
+                        <button class="twos-bit-btn active" data-bits="8">8-bit</button>
+                        <button class="twos-bit-btn" data-bits="16">16-bit</button>
+                        <button class="twos-bit-btn" data-bits="32">32-bit</button>
+                    </div>
+                </div>
+
+                <div class="twos-visualization">
+                    <div class="twos-step">
+                        <span class="step-label" data-i18n="twos.originalBinary">Original Binary (|n|):</span>
+                        <div class="step-bits" id="twos-original">00101010</div>
+                    </div>
+                    <div class="twos-step">
+                        <span class="step-label" data-i18n="twos.inverted">Inverted (NOT):</span>
+                        <div class="step-bits" id="twos-inverted">11010101</div>
+                    </div>
+                    <div class="twos-step">
+                        <span class="step-label" data-i18n="twos.addOne">Add 1:</span>
+                        <div class="step-bits highlight" id="twos-result">11010110</div>
+                    </div>
+                </div>
+
+                <div class="twos-info">
+                    <div class="info-card">
+                        <span class="info-label" data-i18n="twos.decimalValue">Decimal Value:</span>
+                        <span class="info-value" id="twos-decimal">-42</span>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-label" data-i18n="twos.hexValue">Hex Value:</span>
+                        <span class="info-value" id="twos-hex">0xD6</span>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-label" data-i18n="twos.range">Range:</span>
+                        <span class="info-value" id="twos-range">-128 to 127</span>
+                    </div>
+                </div>
+
+                <div class="twos-range-visual">
+                    <div class="range-bar">
+                        <div class="range-marker" id="twos-marker" style="left: 33%"></div>
+                    </div>
+                    <div class="range-labels">
+                        <span id="range-min">-128</span>
+                        <span>0</span>
+                        <span id="range-max">127</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expression Evaluator Section -->
+        <section id="expression" class="section">
+            <div class="section-header">
+                <h1 class="section-title" data-i18n="expression.title">Bitwise Expression Evaluator</h1>
+                <p class="section-subtitle" data-i18n="expression.subtitle">Evaluate complex bitwise expressions</p>
+            </div>
+
+            <div class="expression-container">
+                <div class="expression-variables">
+                    <h3 data-i18n="expression.variables">Variables</h3>
+                    <div class="variable-list" id="variable-list">
+                        <div class="variable-item">
+                            <label>A =</label>
+                            <input type="text" class="variable-input" data-var="A" value="">
+                            <span class="variable-binary">10101010</span>
+                        </div>
+                        <div class="variable-item">
+                            <label>B =</label>
+                            <input type="text" class="variable-input" data-var="B" value="">
+                            <span class="variable-binary">01010101</span>
+                        </div>
+                        <div class="variable-item">
+                            <label>C =</label>
+                            <input type="text" class="variable-input" data-var="C" value="15">
+                            <span class="variable-binary">00001111</span>
+                        </div>
+                        <div class="variable-item">
+                            <label>D =</label>
+                            <input type="text" class="variable-input" data-var="D" value="240">
+                            <span class="variable-binary">11110000</span>
+                        </div>
+                    </div>
+                    <button class="add-variable-btn" id="add-variable" data-i18n="expression.addVariable">+ Add
+                        Variable</button>
+                </div>
+
+                <div class="expression-editor">
+                    <input type="text" class="expression-input" id="expression-input" placeholder="(A & B) | (C ^ D)"
+                        value="(A & B) | (C ^ D)">
+                    <div class="expression-hints">
+                        <span class="hint">&amp; AND</span>
+                        <span class="hint">| OR</span>
+                        <span class="hint">^ XOR</span>
+                        <span class="hint">~ NOT</span>
+                        <span class="hint">&lt;&lt; SHL</span>
+                        <span class="hint">&gt;&gt; SHR</span>
+                    </div>
+                </div>
+
+                <div class="expression-result">
+                    <div class="expr-result-card">
+                        <span class="result-label" data-i18n="expression.result">Result</span>
+                        <div class="result-values">
+                            <span class="result-dec" id="expr-result-dec">255</span>
+                            <span class="result-bin" id="expr-result-bin">11111111</span>
+                            <span class="result-hex" id="expr-result-hex">0xFF</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expression-steps" id="expression-steps">
+                    <!-- Step by step evaluation will be shown here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Color Code Analyzer Section -->
+        <section id="color" class="section">
+            <div class="section-header">
+                <h1 class="section-title" data-i18n="color.title">Color Code Analyzer</h1>
+                <p class="section-subtitle" data-i18n="color.subtitle">Analyze color codes in binary and hexadecimal</p>
+            </div>
+
+            <div class="color-container">
+                <div class="color-input-group">
+                    <input type="text" class="color-input" id="color-input" placeholder="#FF5733" value="#3B82F6">
+                    <input type="color" class="color-picker" id="color-picker" value="#3B82F6">
+                    <div class="color-preview" id="color-preview" style="background: #3B82F6"></div>
+                </div>
+
+                <div class="color-channels">
+                    <div class="channel red">
+                        <div class="channel-header">
+                            <span class="channel-name">R</span>
+                            <span class="channel-value" id="color-r">59</span>
+                        </div>
+                        <div class="channel-bar">
+                            <div class="channel-fill" id="color-r-bar" style="width: 23%"></div>
+                        </div>
+                        <div class="channel-binary" id="color-r-bin">00111011</div>
+                    </div>
+                    <div class="channel green">
+                        <div class="channel-header">
+                            <span class="channel-name">G</span>
+                            <span class="channel-value" id="color-g">130</span>
+                        </div>
+                        <div class="channel-bar">
+                            <div class="channel-fill" id="color-g-bar" style="width: 51%"></div>
+                        </div>
+                        <div class="channel-binary" id="color-g-bin">10000010</div>
+                    </div>
+                    <div class="channel blue">
+                        <div class="channel-header">
+                            <span class="channel-name">B</span>
+                            <span class="channel-value" id="color-b">246</span>
+                        </div>
+                        <div class="channel-bar">
+                            <div class="channel-fill" id="color-b-bar" style="width: 96%"></div>
+                        </div>
+                        <div class="channel-binary" id="color-b-bin">11110110</div>
+                    </div>
+                </div>
+
+                <div class="color-representations">
+                    <div class="repr-item">
+                        <span class="repr-label">HEX:</span>
+                        <span class="repr-value" id="color-hex">#3B82F6</span>
+                        <button class="copy-btn">📋</button>
+                    </div>
+                    <div class="repr-item">
+                        <span class="repr-label">RGB:</span>
+                        <span class="repr-value" id="color-rgb">rgb(59, 130, 246)</span>
+                        <button class="copy-btn">📋</button>
+                    </div>
+                    <div class="repr-item">
+                        <span class="repr-label">HSL:</span>
+                        <span class="repr-value" id="color-hsl">hsl(217, 91%, 60%)</span>
+                        <button class="copy-btn">📋</button>
+                    </div>
+                    <div class="repr-item">
+                        <span class="repr-label">Binary:</span>
+                        <span class="repr-value" id="color-binary">00111011 10000010 11110110</span>
+                        <button class="copy-btn">📋</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASCII Table Section -->
+        <section id="ascii" class="section">
+            <div class="section-header">
+                <h1 class="section-title" data-i18n="ascii.title">ASCII / Unicode Table</h1>
+                <p class="section-subtitle" data-i18n="ascii.subtitle">Browse and search character codes</p>
+            </div>
+
+            <div class="ascii-container">
+                <div class="ascii-search">
+                    <input type="text" class="ascii-search-input" id="ascii-search"
+                        placeholder="Search character or code..." data-i18n-placeholder="ascii.searchPlaceholder">
+                    <div class="ascii-filters">
+                        <button class="filter-btn active" data-filter="all" data-i18n="ascii.all">All</button>
+                        <button class="filter-btn" data-filter="control" data-i18n="ascii.control">Control</button>
+                        <button class="filter-btn" data-filter="printable"
+                            data-i18n="ascii.printable">Printable</button>
+                        <button class="filter-btn" data-filter="extended" data-i18n="ascii.extended">Extended</button>
+                    </div>
+                </div>
+
+                <div class="ascii-converter">
+                    <div class="ascii-input-group">
+                        <label data-i18n="ascii.character">Character:</label>
+                        <input type="text" class="ascii-char-input" id="ascii-char" maxlength="1" placeholder="A">
+                    </div>
+                    <div class="ascii-output-group">
+                        <div class="ascii-output">
+                            <span class="output-label">DEC:</span>
+                            <span class="output-value" id="ascii-dec">65</span>
+                        </div>
+                        <div class="ascii-output">
+                            <span class="output-label">HEX:</span>
+                            <span class="output-value" id="ascii-hex">41</span>
+                        </div>
+                        <div class="ascii-output">
+                            <span class="output-label">BIN:</span>
+                            <span class="output-value" id="ascii-bin">01000001</span>
+                        </div>
+                        <div class="ascii-output">
+                            <span class="output-label">OCT:</span>
+                            <span class="output-value" id="ascii-oct">101</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ascii-table" id="ascii-table">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section id="comparison" class="section">
+            <div class="section-header">
+                <h1 class="section-title" data-i18n="comparison.title">Comparison Mode</h1>
+                <p class="section-subtitle" data-i18n="comparison.subtitle">Compare two numbers bit by bit</p>
+            </div>
+
+            <div class="comparison-container">
+                <div class="comparison-inputs">
+                    <div class="comparison-panel">
+                        <h3 class="panel-title" data-i18n="comparison.valueA">Value A</h3>
+                        <input type="text" class="comparison-input" id="comp-input-a" placeholder="0" value="">
+                        <div class="panel-info">
+                            <span class="info-item">DEC: <strong id="comp-dec-a">170</strong></span>
+                            <span class="info-item">HEX: <strong id="comp-hex-a">AA</strong></span>
+                            <span class="info-item">BIN: <strong id="comp-bin-a">10101010</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-vs">VS</div>
+
+                    <div class="comparison-panel">
+                        <h3 class="panel-title" data-i18n="comparison.valueB">Value B</h3>
+                        <input type="text" class="comparison-input" id="comp-input-b" placeholder="0" value="">
+                        <div class="panel-info">
+                            <span class="info-item">DEC: <strong id="comp-dec-b">85</strong></span>
+                            <span class="info-item">HEX: <strong id="comp-hex-b">55</strong></span>
+                            <span class="info-item">BIN: <strong id="comp-bin-b">01010101</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comparison-row header">
+                        <span class="comp-label">A</span>
+                        <div class="comp-bits" id="comp-bits-a">
+                            <!-- Generated by JS -->
+                        </div>
+                    </div>
+                    <div class="comparison-row diff">
+                        <span class="comp-label" data-i18n="comparison.diff">Diff</span>
+                        <div class="comp-bits" id="comp-bits-diff">
+                            <!-- Generated by JS -->
+                        </div>
+                    </div>
+                    <div class="comparison-row">
+                        <span class="comp-label">B</span>
+                        <div class="comp-bits" id="comp-bits-b">
+                            <!-- Generated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-stats">
+                    <div class="stat-card">
+                        <span class="stat-label">XOR</span>
+                        <span class="stat-value" id="comp-xor-dec">255</span>
+                        <span class="stat-hex" id="comp-xor-hex">0xFF</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label" data-i18n="comparison.hamming">Hamming Distance</span>
+                        <span class="stat-value" id="comp-hamming">8</span>
+                        <span class="stat-detail" data-i18n="comparison.bitsDifferent">bits different</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label" data-i18n="comparison.similarity">Similarity</span>
+                        <span class="stat-value" id="comp-similarity">0%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Binary Music Panel -->
+    <aside class="music-panel" id="music-panel">
+        <div class="music-panel-header">
+            <h3 data-i18n="music.title">🎵 Binary Music</h3>
+            <button class="close-panel-btn" id="close-music">&times;</button>
+        </div>
+        <div class="music-controls">
+            <div class="music-buttons">
+                <button class="music-btn play" id="music-play" data-i18n="music.play">▶ Play</button>
+                <button class="music-btn stop" id="music-stop" data-i18n="music.stop">⏹ Stop</button>
+                <button class="music-btn loop" id="music-loop" data-i18n="music.loop">🔁 Loop</button>
+            </div>
+            <div class="music-slider">
+                <label data-i18n="music.tempo">Tempo:</label>
+                <input type="range" id="music-tempo" min="60" max="200" value="120">
+                <span id="music-tempo-value">120 BPM</span>
+            </div>
+            <div class="music-wave-selector">
+                <label data-i18n="music.wave">Wave:</label>
+                <div class="wave-buttons">
+                    <button class="wave-btn active" data-wave="sine">Sine</button>
+                    <button class="wave-btn" data-wave="square">Square</button>
+                    <button class="wave-btn" data-wave="sawtooth">Saw</button>
+                    <button class="wave-btn" data-wave="triangle">Triangle</button>
+                </div>
+            </div>
+            <div class="music-slider">
+                <label data-i18n="music.volume">Volume:</label>
+                <input type="range" id="music-volume" min="0" max="100" value="70">
+                <span id="music-volume-value">70%</span>
+            </div>
+        </div>
+        <div class="music-visualizer">
+            <div class="music-notes" id="music-notes">
+                <span class="note">C4</span>
+                <span class="note">D4</span>
+                <span class="note">E4</span>
+                <span class="note">F4</span>
+                <span class="note">G4</span>
+                <span class="note">A4</span>
+                <span class="note">B4</span>
+                <span class="note">C5</span>
+            </div>
+            <div class="current-note" id="current-note">♪ Ready</div>
+        </div>
+    </aside>
+
+    <!-- History Panel -->
+    <aside class="history-panel" id="history-panel">
+        <div class="history-panel-header">
+            <h3 data-i18n="history.title">📜 History</h3>
+            <button class="close-panel-btn" id="close-history">&times;</button>
+        </div>
+        <div class="history-tabs">
+            <button class="history-tab active" data-tab="history" data-i18n="history.recent">Recent</button>
+            <button class="history-tab" data-tab="favorites" data-i18n="history.favorites">⭐ Favorites</button>
+        </div>
+        <div class="history-list" id="history-list">
+            <!-- Generated by JavaScript -->
+        </div>
+        <button class="clear-history-btn" id="clear-history" data-i18n="history.clear">Clear History</button>
+    </aside>
+
+    <!-- Keyboard Shortcuts Modal -->
+    <div class="modal" id="shortcuts-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="shortcuts.title">⌨️ Keyboard Shortcuts</h2>
+                <button class="modal-close" id="close-shortcuts">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="shortcuts-grid">
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>1</kbd>
+                        <span data-i18n="shortcuts.focusDec">Focus Decimal input</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>2</kbd>
+                        <span data-i18n="shortcuts.focusBin">Focus Binary input</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>3</kbd>
+                        <span data-i18n="shortcuts.focusHex">Focus Hexadecimal input</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>4</kbd>
+                        <span data-i18n="shortcuts.focusOct">Focus Octal input</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>B</kbd>
+                        <span data-i18n="shortcuts.toggleBitgrid">Toggle Bit Grid</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>M</kbd>
+                        <span data-i18n="shortcuts.toggleMusic">Toggle Binary Music</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>H</kbd>
+                        <span data-i18n="shortcuts.toggleHistory">Toggle History</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>K</kbd>
+                        <span data-i18n="shortcuts.showShortcuts">Show Shortcuts</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Esc</kbd>
+                        <span data-i18n="shortcuts.closeModal">Close Modal/Panel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particle Canvas for Bit Dance -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Scripts -->
+    <script src="js/utils/dom.js"></script>
+    <script src="js/utils/storage.js"></script>
+    <script src="js/utils/audio.js"></script>
+    <!-- Language Files -->
+    <script src="js/lang/es.js"></script>
+    <script src="js/lang/zh.js"></script>
+    <script src="js/lang/hi.js"></script>
+    <script src="js/lang/ar.js"></script>
+    <script src="js/lang/pt.js"></script>
+    <script src="js/lang/ru.js"></script>
+    <script src="js/lang/ja.js"></script>
+    <script src="js/lang/de.js"></script>
+    <script src="js/lang/fr.js"></script>
+    <script src="js/core/i18n.js"></script>
+    <script src="js/core/converter.js"></script>
+    <script src="js/core/bitops.js"></script>
+    <script src="js/components/bitgrid.js"></script>
+    <script src="js/components/operations.js"></script>
+    <script src="js/components/ieee754.js"></script>
+    <script src="js/components/twos.js"></script>
+    <script src="js/components/expression.js"></script>
+    <script src="js/components/colorcode.js"></script>
+    <script src="js/components/ascii.js"></script>
+    <script src="js/components/comparison.js"></script>
+    <script src="js/features/bitdance.js"></script>
+    <script src="js/features/music.js"></script>
+    <script src="js/features/history.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
